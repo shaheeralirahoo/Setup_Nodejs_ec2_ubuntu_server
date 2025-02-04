@@ -75,7 +75,32 @@ sudo apt install certbot python3-certbot-nginx -y
 ```
 Certbot helps in obtaining and renewing SSL certificates for HTTPS security.
 
-## Step 9: Configure Nginx as a Reverse Proxy for Node.js
+## Step 9: Clone Your Git Repository and Start Application with PM2
+
+### 1. Create a Classic GitHub Token
+1. Log in to **GitHub**.
+2. Navigate to **Settings** > **Developer Settings** > **Personal Access Tokens**.
+3. Click **Generate new token (classic)**.
+4. Select the required scopes (e.g., **repo** for private repositories).
+5. Generate and copy the token.
+
+### 2. Clone Your Repository
+Replace `<TOKEN>` and `<REPO_URL>` with your actual token and repository URL:
+```bash
+git clone https://<TOKEN>@github.com/<USERNAME>/<REPOSITORY>.git
+```
+
+### 3. Start Your Application with PM2
+Navigate to the cloned repository and start your Node.js application:
+```bash
+cd <REPOSITORY>
+pm install
+pm run build  # If applicable
+pm2 start <FILE_NAME>
+```
+Replace `<FILE_NAME>` with the entry file of your Node.js application (e.g., `app.js` or `server.js`).
+
+## Step 10: Configure Nginx as a Reverse Proxy for Node.js
 The script modifies the default Nginx configuration to proxy requests to a Node.js application running on port 3000.
 ```bash
 NGINX_CONFIG="/etc/nginx/sites-available/default"
@@ -95,7 +120,7 @@ server {
 EOF
 ```
 
-## Step 10: Test and Reload Nginx
+## Step 11: Test and Reload Nginx
 ```bash
 sudo nginx -t
 sudo systemctl reload nginx
@@ -137,4 +162,6 @@ Replace `your-bucket-name` with your actual bucket name.
 
 ## Final Message
 Once the script completes, your EC2 instance is set up with Git, Node.js, PM2, Nginx, and Certbot. Additionally, if opted, your S3 bucket is configured for public read access with an IAM user for management.
+there  is  setup node  js shell file  for  setting  up  server  you  can  use that  when  creating server  or jOnce the script completes, your EC2 instance is set up with Git, Node.js, PM2, Nginx, and Certbot. Additionally, if opted, your S3 bucket is configured for public read access with an IAM user for management.
 
+You can use the provided Node.js setup shell script to automate this entire process when setting up your server. Simply upload the script to your instance and execute it for a streamlined installation experience.
